@@ -13,20 +13,18 @@ const (
 	Left
 )
 
-type pos struct{ x, y int }
-
 type Guard struct {
-	pos
+	util.Position
 	direction      direction
 	numDistinctPos int
-	visited        map[pos]bool
+	visited        map[util.Position]bool
 }
 
 func NewGuard(x int, y int) *Guard {
-	visited := make(map[pos]bool)
-	visited[pos{x: x, y: y}] = true
+	visited := make(map[util.Position]bool)
+	visited[util.Position{X: x, Y: y}] = true
 	return &Guard{
-		pos:            pos{x: x, y: y},
+		Position:       util.Position{X: x, Y: y},
 		direction:      Up, // always start up
 		numDistinctPos: 1,  // starting pos is inclusive
 		visited:        visited,
@@ -35,8 +33,8 @@ func NewGuard(x int, y int) *Guard {
 
 func (g *Guard) HasLeftMap(patrolMap [][]string) bool {
 	// determine if we hit a "#"
-	nextX := g.x
-	nextY := g.y
+	nextX := g.X
+	nextY := g.Y
 
 	// preemptively check the next position
 	switch g.direction {
@@ -74,8 +72,8 @@ func (g *Guard) HasLeftMap(patrolMap [][]string) bool {
 		g.MoveLeft()
 	}
 
-	if _, ok := g.visited[pos{g.x, g.y}]; !ok {
-		g.visited[pos{x: g.x, y: g.y}] = true
+	if _, ok := g.visited[util.Position{X: g.X, Y: g.Y}]; !ok {
+		g.visited[util.Position{X: g.X, Y: g.Y}] = true
 		g.numDistinctPos++
 	}
 
@@ -83,19 +81,19 @@ func (g *Guard) HasLeftMap(patrolMap [][]string) bool {
 }
 
 func (g *Guard) MoveUp() {
-	g.y--
+	g.Y--
 }
 
 func (g *Guard) MoveDown() {
-	g.y++
+	g.Y++
 }
 
 func (g *Guard) MoveRight() {
-	g.x++
+	g.X++
 }
 
 func (g *Guard) MoveLeft() {
-	g.x--
+	g.X--
 }
 
 func (g *Guard) Turn90() {

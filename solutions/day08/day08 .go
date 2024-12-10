@@ -51,10 +51,10 @@ func (d *Day08) buildAntennas(grid [][]string) map[string][]*Antenna {
 	return antennasWithFreqs
 }
 
-func (d *Day08) GenerateAntiNodes(grid [][]string, antennasWithFreqs map[string][]*Antenna, isResonantHarmonics bool) map[Position]*Antenna {
+func (d *Day08) GenerateAntiNodes(grid [][]string, antennasWithFreqs map[string][]*Antenna, isResonantHarmonics bool) map[util.Position]*Antenna {
 	// for each frequency, calculate the potential anti-nodes possible with each other
 	// ignore any that are out of bounds
-	uniqueAntiNode := make(map[Position]*Antenna)
+	uniqueAntiNode := make(map[util.Position]*Antenna)
 	var wg sync.WaitGroup
 	var mu sync.Mutex
 	for _, antennas := range antennasWithFreqs {

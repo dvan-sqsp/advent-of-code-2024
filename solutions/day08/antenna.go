@@ -1,12 +1,12 @@
 package day08
 
-type Antenna struct {
-	Position
-	Frequency string
-}
+import (
+	"github.com/dvan-sqsp/advent-of-code-2024/util"
+)
 
-type Position struct {
-	X, Y int
+type Antenna struct {
+	util.Position
+	Frequency string
 }
 
 func NewAntenna(x int, y int, frequency string) *Antenna {
@@ -15,12 +15,12 @@ func NewAntenna(x int, y int, frequency string) *Antenna {
 	}
 }
 
-func NewPos(x, y int) Position {
-	return Position{X: x, Y: y}
+func NewPos(x, y int) util.Position {
+	return util.Position{X: x, Y: y}
 }
 
-func (a *Antenna) Distance(b *Antenna) Position {
-	return Position{
+func (a *Antenna) Distance(b *Antenna) util.Position {
+	return util.Position{
 		X: a.X - b.Position.X,
 		Y: a.Y - b.Position.Y,
 	}
