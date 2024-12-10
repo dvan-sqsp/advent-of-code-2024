@@ -20,7 +20,7 @@ func ReadInts(line string, sep string) ([]int, error) {
 }
 
 // IsInBounds checks if the point (x, y) is within the bounds of the matrix
-func IsInBounds(twoDSlice [][]string, x, y int) bool {
+func IsInBounds[T int | string](twoDSlice [][]T, x, y int) bool {
 	return x >= 0 && y >= 0 && x < len(twoDSlice) && y < len(twoDSlice[0])
 }
 
@@ -30,6 +30,18 @@ func Build2DMap(input []string) [][]string {
 		m[i] = make([]string, len(line))
 		for j, letter := range strings.Split(line, "") {
 			m[i][j] = letter
+		}
+	}
+	return m
+}
+
+func Build2DMapInt(input []string) [][]int {
+	m := make([][]int, len(input))
+	for i, line := range input {
+		m[i] = make([]int, len(line))
+		for j, numStr := range strings.Split(line, "") {
+			num, _ := strconv.Atoi(numStr)
+			m[i][j] = num
 		}
 	}
 	return m
