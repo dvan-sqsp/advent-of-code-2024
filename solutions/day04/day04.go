@@ -39,7 +39,9 @@ const (
 
 func (d *Day04) Part1(lines []string) string {
 	total := 0
-	wordSearch := util.Build2DMap(lines)
+	wordSearch := util.Build2DMap(lines, func(e string) string {
+		return e
+	})
 	for y, row := range wordSearch {
 		for x, letter := range row {
 			// only care about X
@@ -54,7 +56,9 @@ func (d *Day04) Part1(lines []string) string {
 
 func (d *Day04) Part2(lines []string) string {
 	total := 0
-	wordSearch := util.Build2DMap(lines)
+	wordSearch := util.Build2DMap(lines, func(e string) string {
+		return e
+	})
 	for y, row := range wordSearch {
 		for x, letter := range row {
 			// only care about A

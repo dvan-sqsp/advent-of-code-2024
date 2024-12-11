@@ -2,6 +2,7 @@ package day10
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/dvan-sqsp/advent-of-code-2024/internal/solver"
 	"github.com/dvan-sqsp/advent-of-code-2024/util"
@@ -43,7 +44,10 @@ func (d *Day10) Part2(lines []string) string {
 }
 
 func (d *Day10) buildTrail(lines []string) ([][]int, []TrailHead) {
-	grid := util.Build2DMapInt(lines)
+	grid := util.Build2DMap(lines, func(e string) int {
+		num, _ := strconv.Atoi(e)
+		return num
+	})
 
 	trailHeads := make([]TrailHead, 0)
 	for y, row := range grid {

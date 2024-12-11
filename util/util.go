@@ -24,24 +24,13 @@ func IsInBounds[T int | string](twoDSlice [][]T, x, y int) bool {
 	return x >= 0 && y >= 0 && x < len(twoDSlice) && y < len(twoDSlice[0])
 }
 
-func Build2DMap(input []string) [][]string {
-	m := make([][]string, len(input))
+func Build2DMap[T any](input []string, convFunc func(e string) T) [][]T {
+	m := make([][]T, len(input))
 	for i, line := range input {
-		m[i] = make([]string, len(line))
-		for j, letter := range strings.Split(line, "") {
-			m[i][j] = letter
-		}
-	}
-	return m
-}
-
-func Build2DMapInt(input []string) [][]int {
-	m := make([][]int, len(input))
-	for i, line := range input {
-		m[i] = make([]int, len(line))
-		for j, numStr := range strings.Split(line, "") {
-			num, _ := strconv.Atoi(numStr)
-			m[i][j] = num
+		m[i] = make([]T, len(line))
+		for j, e := range strings.Split(line, "") {
+			element := convFunc(e)
+			m[i][j] = element
 		}
 	}
 	return m

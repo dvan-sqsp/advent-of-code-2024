@@ -17,7 +17,9 @@ func New() *Day08 {
 }
 
 func (d *Day08) Part1(lines []string) string {
-	grid := util.Build2DMap(lines)
+	grid := util.Build2DMap(lines, func(e string) string {
+		return e
+	})
 
 	antennasWithFreqs := d.buildAntennas(grid)
 
@@ -27,7 +29,9 @@ func (d *Day08) Part1(lines []string) string {
 }
 
 func (d *Day08) Part2(lines []string) string {
-	grid := util.Build2DMap(lines)
+	grid := util.Build2DMap(lines, func(e string) string {
+		return e
+	})
 
 	antennasWithFreqs := d.buildAntennas(grid)
 

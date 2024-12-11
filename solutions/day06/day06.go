@@ -18,7 +18,9 @@ func New() *Day06 {
 
 func (d *Day06) Part1(lines []string) string {
 	total := 0
-	patrolMap := util.Build2DMap(lines)
+	patrolMap := util.Build2DMap(lines, func(e string) string {
+		return e
+	})
 
 	var guard *Guard
 	for y, row := range patrolMap {
